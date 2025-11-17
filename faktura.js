@@ -64,22 +64,22 @@ quantityInput.addEventListener('input', calculateAmount);
 
 function createInvoiceXML() {
     let xmlOutput = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    xmlOutput += '<Faktura xmlns="http://twojaFirma.pl/faktura/v1">\n';
-    xmlOutput += '  <Naglowek>\n';
-    xmlOutput += `    <NumerFaktury>${document.getElementById('numerFaktury').value || ''}</NumerFaktury>\n`;
-    xmlOutput += `    <DataWystawienia>${document.getElementById('data_wystawienia').value || ''}</DataWystawienia>\n`;
-    xmlOutput += `    <DataSprzedazy>${document.getElementById('data_sprzedazy').value || ''}</DataSprzedazy>\n`;
+    xmlOutput += '<Faktura>\n';
+    xmlOutput += '  <Dane>\n';
+    xmlOutput += `    <Numer.Faktury>${document.getElementById('numerFaktury').value || ''}</Numer.Faktury>\n`;
+    xmlOutput += `    <Data.Wystawienia>${document.getElementById('data_wystawienia').value || ''}</Data.Wystawienia>\n`;
+    xmlOutput += `    <Data.Sprzedazy>${document.getElementById('data_sprzedazy').value || ''}</Data.Sprzedazy>\n`;
     xmlOutput += '    <Klient>\n';
-    xmlOutput += `      <NazwaKlienta>${document.getElementById('klient').value || ''}</NazwaKlienta>\n`;
-    xmlOutput += `      <AdresKlienta>${document.getElementById('adres_klient').value || ''}</AdresKlienta>\n`;
-    xmlOutput += `      <NIPKlienta>${document.getElementById('klient_nip').value || ''}</NIPKlienta>\n`;
+    xmlOutput += `      <Klient>${document.getElementById('klient').value || ''}</Klient>\n`;
+    xmlOutput += `      <Adres.Klienta>${document.getElementById('adres_klient').value || ''}</Adres.Klienta>\n`;
+    xmlOutput += `      <NIP.Klienta>${document.getElementById('klient_nip').value || ''}</NIP.Klienta>\n`;
     xmlOutput += '    </Klient>\n';
     xmlOutput += '    <Sprzedawca>\n';
-    xmlOutput += `      <NazwaSprzedawcy>${document.getElementById('sprzedawca').value || ''}</NazwaSprzedawcy>\n`;
-    xmlOutput += `      <AdresSprzedawcy>${document.getElementById('adres_sprzedawca').value || ''}</AdresSprzedawcy>\n`; // POPRAWIONE: adres_sprzedawca
-    xmlOutput += `      <NIPSprzedawcy>${document.getElementById('sprzedawca_nip').value || ''}</NIPSprzedawcy>\n`;
+    xmlOutput += `      <Sprzedawca>${document.getElementById('sprzedawca').value || ''}</Sprzedawca>\n`;
+    xmlOutput += `      <Adres.Sprzedawcy>${document.getElementById('adres_sprzedawca').value || ''}</Adres.Sprzedawcy>\n`; // POPRAWIONE: adres_sprzedawca
+    xmlOutput += `      <NIP.Sprzedawcy>${document.getElementById('sprzedawca_nip').value || ''}</NIP.Sprzedawcy>\n`;
     xmlOutput += '    </Sprzedawca>\n';
-    xmlOutput += '  </Naglowek>\n';
+    xmlOutput += '  </Dane>\n';
     xmlOutput += '  <Pozycje>\n';
     const rows = productList.querySelectorAll('.product-row');
     rows.forEach((row, index) => {
@@ -88,9 +88,9 @@ function createInvoiceXML() {
         const amount = row.querySelector('.amount-cell').textContent.replace(',', '.');
         xmlOutput += `    <Produkt Lp="${index + 1}">\n`;
         xmlOutput += `      <Opis>${row.querySelector('.description-cell').textContent}</Opis>\n`;
-        xmlOutput += `      <WartoscJednostkowa>${value}</WartoscJednostkowa>\n`;
+        xmlOutput += `      <Wartosc.Za.Jeden>${value}</Wartosc.Za.Jeden>\n`;
         xmlOutput += `      <Ilosc>${quantity}</Ilosc>\n`;
-        xmlOutput += `      <KwotaCalkowita>${amount}</KwotaCalkowita>\n`;
+        xmlOutput += `      <Kwota.Calkowita>${amount}</Kwota.Calkowita>\n`;
         xmlOutput += '    </Produkt>\n';
     });
     xmlOutput += '  </Pozycje>\n';
