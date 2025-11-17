@@ -66,18 +66,18 @@ function createInvoiceXML() {
     let xmlOutput = '<?xml version="1.0" encoding="UTF-8"?>\n';
     xmlOutput += '<Faktura>\n';
     xmlOutput += '  <Dane>\n';
-    xmlOutput += `    <Numer.Faktury>${document.getElementById('numerFaktury').value || ''}</Numer.Faktury>\n`;
-    xmlOutput += `    <Data.Wystawienia>${document.getElementById('data_wystawienia').value || ''}</Data.Wystawienia>\n`;
-    xmlOutput += `    <Data.Sprzedazy>${document.getElementById('data_sprzedazy').value || ''}</Data.Sprzedazy>\n`;
+    xmlOutput += `    <NumerFaktury>${document.getElementById('numerFaktury').value || ''}</NumerFaktury>\n`;
+    xmlOutput += `    <DataWystawienia>${document.getElementById('data_wystawienia').value || ''}</DataWystawienia>\n`;
+    xmlOutput += `    <DataSprzedazy>${document.getElementById('data_sprzedazy').value || ''}</DataSprzedazy>\n`;
     xmlOutput += '    <Klient>\n';
-    xmlOutput += `      <Nazwa.Klient>${document.getElementById('klient').value || ''}</Nazwa.Klient>\n`;
-    xmlOutput += `      <Adres.Klienta>${document.getElementById('adres_klient').value || ''}</Adres.Klienta>\n`;
-    xmlOutput += `      <NIP.Klienta>${document.getElementById('klient_nip').value || ''}</NIP.Klienta>\n`;
+    xmlOutput += `      <NazwaKlient>${document.getElementById('klient').value || ''}</NazwaKlient>\n`;
+    xmlOutput += `      <AdresKlienta>${document.getElementById('adres_klient').value || ''}</AdresKlienta>\n`;
+    xmlOutput += `      <NIPKlienta>${document.getElementById('klient_nip').value || ''}</NIPKlienta>\n`;
     xmlOutput += '    </Klient>\n';
     xmlOutput += '    <Sprzedawca>\n';
-    xmlOutput += `      <Nazwa.Sprzedawca>${document.getElementById('sprzedawca').value || ''}</Nazwa.Sprzedawca>\n`;
-    xmlOutput += `      <Adres.Sprzedawcy>${document.getElementById('adres_sprzedawca').value || ''}</Adres.Sprzedawcy>\n`; // POPRAWIONE: adres_sprzedawca
-    xmlOutput += `      <NIP.Sprzedawcy>${document.getElementById('sprzedawca_nip').value || ''}</NIP.Sprzedawcy>\n`;
+    xmlOutput += `      <NazwaSprzedawca>${document.getElementById('sprzedawca').value || ''}</NazwaSprzedawca>\n`;
+    xmlOutput += `      <AdresSprzedawcy>${document.getElementById('adres_sprzedawca').value || ''}</AdresSprzedawcy>\n`; // POPRAWIONE: adres_sprzedawca
+    xmlOutput += `      <NIPSprzedawcy>${document.getElementById('sprzedawca_nip').value || ''}</NIPSprzedawcy>\n`;
     xmlOutput += '    </Sprzedawca>\n';
     xmlOutput += '  </Dane>\n';
     xmlOutput += '  <Pozycje>\n';
@@ -88,9 +88,9 @@ function createInvoiceXML() {
         const amount = row.querySelector('.amount-cell').textContent.replace(',', '.');
         xmlOutput += `    <Produkt Lp="${index + 1}">\n`;
         xmlOutput += `      <Opis>${row.querySelector('.description-cell').textContent}</Opis>\n`;
-        xmlOutput += `      <Wartosc.Za.Jeden>${value}</Wartosc.Za.Jeden>\n`;
+        xmlOutput += `      <WartoscZaJeden>${value}</WartoscZaJeden>\n`;
         xmlOutput += `      <Ilosc>${quantity}</Ilosc>\n`;
-        xmlOutput += `      <Kwota.Calkowita>${amount}</Kwota.Calkowita>\n`;
+        xmlOutput += `      <KwotaCalkowita>${amount}</KwotaCalkowita>\n`;
         xmlOutput += '    </Produkt>\n';
     });
     xmlOutput += '  </Pozycje>\n';
@@ -137,17 +137,17 @@ xmlImporter.addEventListener('change', (event) => {
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlString, "application/xml");
             
-            document.getElementById('numerFaktury').value = getXmlValue(xmlDoc, 'Numer.Faktury');
-            document.getElementById('data_wystawienia').value = getXmlValue(xmlDoc, 'Data.Wystawienia');
-            document.getElementById('data_sprzedazy').value = getXmlValue(xmlDoc, 'Data.Sprzedazy');
+            document.getElementById('numerFaktury').value = getXmlValue(xmlDoc, 'NumerFaktury');
+            document.getElementById('data_wystawienia').value = getXmlValue(xmlDoc, 'DataWystawienia');
+            document.getElementById('data_sprzedazy').value = getXmlValue(xmlDoc, 'DataSprzedazy');
 
-            document.getElementById('klient').value = getXmlValue(xmlDoc, 'Nazwa.Klient');
-            document.getElementById('adres_klient').value = getXmlValue(xmlDoc, 'Adres.Klienta');
-            document.getElementById('klient_nip').value = getXmlValue(xmlDoc, 'NIP.Klienta');
+            document.getElementById('klient').value = getXmlValue(xmlDoc, 'NazwaKlient');
+            document.getElementById('adres_klient').value = getXmlValue(xmlDoc, 'AdresKlienta');
+            document.getElementById('klient_nip').value = getXmlValue(xmlDoc, 'NIPKlienta');
 
-            document.getElementById('sprzedawca').value = getXmlValue(xmlDoc, 'Nazwa.Sprzedawca');
-            document.getElementById('adres_sprzedawca').value = getXmlValue(xmlDoc, 'Adres.Sprzedawcy'); // POPRAWIONE: adres_sprzedawca
-            document.getElementById('sprzedawca_nip').value = getXmlValue(xmlDoc, 'NIP.Sprzedawcy');
+            document.getElementById('sprzedawca').value = getXmlValue(xmlDoc, 'NazwaSprzedawca');
+            document.getElementById('adres_sprzedawca').value = getXmlValue(xmlDoc, 'AdresSprzedawcy'); // POPRAWIONE: adres_sprzedawca
+            document.getElementById('sprzedawca_nip').value = getXmlValue(xmlDoc, 'NIPSprzedawcy');
             
             const produkty = xmlDoc.getElementsByTagName('Produkt');
             
@@ -157,9 +157,9 @@ xmlImporter.addEventListener('change', (event) => {
             if (produkty.length > 0) {
                 Array.from(produkty).forEach(p => {
                     const desc = p.getElementsByTagName('Opis')[0]?.textContent || 'Brak opisu';
-                    const value = parseFloat(p.getElementsByTagName('Wartosc.Za.Jeden')[0]?.textContent) || 0;
+                    const value = parseFloat(p.getElementsByTagName('WartoscZaJeden')[0]?.textContent) || 0;
                     const quantity = parseInt(p.getElementsByTagName('Ilosc')[0]?.textContent) || 0;
-                    const amount = parseFloat(p.getElementsByTagName('Kwota.Calkowita')[0]?.textContent) || (value * quantity);
+                    const amount = parseFloat(p.getElementsByTagName('KwotaCalkowita')[0]?.textContent) || (value * quantity);
                     generateRow(currentLp++, desc, value, quantity, amount);
                 });
             }
@@ -172,5 +172,3 @@ xmlImporter.addEventListener('change', (event) => {
     };
     reader.readAsText(file);
 });
-
-
