@@ -70,12 +70,12 @@ function createInvoiceXML() {
     xmlOutput += `    <Data.Wystawienia>${document.getElementById('data_wystawienia').value || ''}</Data.Wystawienia>\n`;
     xmlOutput += `    <Data.Sprzedazy>${document.getElementById('data_sprzedazy').value || ''}</Data.Sprzedazy>\n`;
     xmlOutput += '    <Klient>\n';
-    xmlOutput += `      <Klient>${document.getElementById('klient').value || ''}</Klient>\n`;
+    xmlOutput += `      <Nazwa.Klient>${document.getElementById('klient').value || ''}</Nazwa.Klient>\n`;
     xmlOutput += `      <Adres.Klienta>${document.getElementById('adres_klient').value || ''}</Adres.Klienta>\n`;
     xmlOutput += `      <NIP.Klienta>${document.getElementById('klient_nip').value || ''}</NIP.Klienta>\n`;
     xmlOutput += '    </Klient>\n';
     xmlOutput += '    <Sprzedawca>\n';
-    xmlOutput += `      <Sprzedawca>${document.getElementById('sprzedawca').value || ''}</Sprzedawca>\n`;
+    xmlOutput += `      <Nazwa.Sprzedawca>${document.getElementById('sprzedawca').value || ''}</Nazwa.Sprzedawca>\n`;
     xmlOutput += `      <Adres.Sprzedawcy>${document.getElementById('adres_sprzedawca').value || ''}</Adres.Sprzedawcy>\n`; // POPRAWIONE: adres_sprzedawca
     xmlOutput += `      <NIP.Sprzedawcy>${document.getElementById('sprzedawca_nip').value || ''}</NIP.Sprzedawcy>\n`;
     xmlOutput += '    </Sprzedawca>\n';
@@ -141,11 +141,11 @@ xmlImporter.addEventListener('change', (event) => {
             document.getElementById('data_wystawienia').value = getXmlValue(xmlDoc, 'Data.Wystawienia');
             document.getElementById('data_sprzedazy').value = getXmlValue(xmlDoc, 'Data.Sprzedazy');
 
-            document.getElementById('klient').value = getXmlValue(xmlDoc, 'Klient');
+            document.getElementById('klient').value = getXmlValue(xmlDoc, 'Nazwa.Klient');
             document.getElementById('adres_klient').value = getXmlValue(xmlDoc, 'Adres.Klienta');
             document.getElementById('klient_nip').value = getXmlValue(xmlDoc, 'NIP.Klienta');
 
-            document.getElementById('sprzedawca').value = getXmlValue(xmlDoc, 'Sprzedawca');
+            document.getElementById('sprzedawca').value = getXmlValue(xmlDoc, 'Nazwa.Sprzedawca');
             document.getElementById('adres_sprzedawca').value = getXmlValue(xmlDoc, 'Adres.Sprzedawcy'); // POPRAWIONE: adres_sprzedawca
             document.getElementById('sprzedawca_nip').value = getXmlValue(xmlDoc, 'NIP.Sprzedawcy');
             
@@ -172,4 +172,5 @@ xmlImporter.addEventListener('change', (event) => {
     };
     reader.readAsText(file);
 });
+
 
