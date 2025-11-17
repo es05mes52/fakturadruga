@@ -137,17 +137,17 @@ xmlImporter.addEventListener('change', (event) => {
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlString, "application/xml");
             
-            document.getElementById('numerFaktury').value = getXmlValue(xmlDoc, 'NumerFaktury');
-            document.getElementById('data_wystawienia').value = getXmlValue(xmlDoc, 'DataWystawienia');
-            document.getElementById('data_sprzedazy').value = getXmlValue(xmlDoc, 'DataSprzedazy');
+            document.getElementById('numerFaktury').value = getXmlValue(xmlDoc, 'Numer.Faktury');
+            document.getElementById('data_wystawienia').value = getXmlValue(xmlDoc, 'Data.Wystawienia');
+            document.getElementById('data_sprzedazy').value = getXmlValue(xmlDoc, 'Data.Sprzedazy');
 
-            document.getElementById('klient').value = getXmlValue(xmlDoc, 'NazwaKlienta');
-            document.getElementById('adres_klient').value = getXmlValue(xmlDoc, 'AdresKlienta');
-            document.getElementById('klient_nip').value = getXmlValue(xmlDoc, 'NIPKlienta');
+            document.getElementById('klient').value = getXmlValue(xmlDoc, 'Klient');
+            document.getElementById('adres_klient').value = getXmlValue(xmlDoc, 'Adres.Klienta');
+            document.getElementById('klient_nip').value = getXmlValue(xmlDoc, 'NIP.Klienta');
 
-            document.getElementById('sprzedawca').value = getXmlValue(xmlDoc, 'NazwaSprzedawcy');
-            document.getElementById('adres_sprzedawca').value = getXmlValue(xmlDoc, 'AdresSprzedawcy'); // POPRAWIONE: adres_sprzedawca
-            document.getElementById('sprzedawca_nip').value = getXmlValue(xmlDoc, 'NIPSprzedawcy');
+            document.getElementById('sprzedawca').value = getXmlValue(xmlDoc, 'Sprzedawca');
+            document.getElementById('adres_sprzedawca').value = getXmlValue(xmlDoc, 'Adres.Sprzedawcy'); // POPRAWIONE: adres_sprzedawca
+            document.getElementById('sprzedawca_nip').value = getXmlValue(xmlDoc, 'NIP.Sprzedawcy');
             
             const produkty = xmlDoc.getElementsByTagName('Produkt');
             
@@ -157,9 +157,9 @@ xmlImporter.addEventListener('change', (event) => {
             if (produkty.length > 0) {
                 Array.from(produkty).forEach(p => {
                     const desc = p.getElementsByTagName('Opis')[0]?.textContent || 'Brak opisu';
-                    const value = parseFloat(p.getElementsByTagName('WartoscJednostkowa')[0]?.textContent) || 0;
+                    const value = parseFloat(p.getElementsByTagName('Wartosc.Za.Jeden')[0]?.textContent) || 0;
                     const quantity = parseInt(p.getElementsByTagName('Ilosc')[0]?.textContent) || 0;
-                    const amount = parseFloat(p.getElementsByTagName('KwotaCalkowita')[0]?.textContent) || (value * quantity);
+                    const amount = parseFloat(p.getElementsByTagName('Kwota.Calkowita')[0]?.textContent) || (value * quantity);
                     generateRow(currentLp++, desc, value, quantity, amount);
                 });
             }
@@ -172,3 +172,4 @@ xmlImporter.addEventListener('change', (event) => {
     };
     reader.readAsText(file);
 });
+
