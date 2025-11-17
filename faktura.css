@@ -8,57 +8,29 @@ body {
     margin: 0; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
+.elo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
 
-
+}
 h1 {
     color: #2d3550;
+    margin-top: 20px;
+    margin-bottom: 20px;
     text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
 }
-
-
-.srodek {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    width: 900px;
-    height: 650px;
-    padding: 25px;
-    background-color: rgba(255, 255, 255, 0.5); /* półprzezroczysty biały */
-    border-radius: 5px;
-    
-    margin-top: 40px;
-    position: relative;
-}
-
-
-.napisnapis {
-    width: 50%; 
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-/* 🔹 Główny panel przycisków */
-.head {
-    width: 100%; 
-    display: flex;
-    justify-content: center;
-    gap: 15px; 
-    margin-bottom: 10px; 
-    padding-bottom: 10px;
-}
-
-/* 🔹 Przycisk */
+.przyciski {display: flex; gap: 15px; }
 .buttonHead {
     width: 150px; 
     height: 30px;
     border-radius: 6px;
     border: none; 
+    font-weight: bold;
     background-color: #29375a;
     color: #95a6b8; 
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
     transition: background-color 0.2s;
 }
@@ -67,39 +39,43 @@ h1 {
     color: #29375a;
 }
 
-.Klient { 
+.cialo {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 900px;
+    height: 650px;
+    padding: 25px;
+    
+    
+    margin-top: 40px;
+    position: relative;
+}
+
+.dane { 
     display: grid; 
     grid-template-columns: auto 1fr auto 1fr auto 1fr;
-    gap: 15px 30px; 
+    gap: 10px 10px; 
     width: 100%; 
-    margin-bottom: 15px; 
+    max-width: 850px;
+    margin: 0 auto 15 px;
     padding: 15px;
     border: 1px solid #95a6b8; /* ramka koloru tła */
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.4);
-} 
-     
-.Klient label { 
+    
+}     
+.dane label { 
     text-align: right; 
-    font-weight: 450; 
+    font-weight: bold; 
+
     color: #081a2f; 
+    border-radius: 3px;
     align-self: center; } 
     
-.Klient input[type="text"], 
-.Klient input[type="date"] { 
+.dane input[type="text"], 
+.dane input[type="date"] { 
     width: 100%; padding: 8px 12px; border: 1px solid #c8d3e6; border-radius: 3px; box-sizing: border-box; }
-
-
-.scrollable-content {
-    width: 100%;
-    flex-grow: 1;
-    overflow-y: auto; 
-    padding-right: 15px;
-}
-
-
-
-
 .table-header {
     display: flex;
     font-weight: 600;
@@ -112,7 +88,7 @@ h1 {
 .table-header .description { width: 45%; padding-left: 10px; }
 .table-header .value, .table-header .quantity, .table-header .amount, .table-header .actions { width: 15%; text-align: right; padding-right: 10px;}
 
-/* 🔹 Wiersz dodawania produktów */
+
 .input-row {
     display: flex;
     align-items: center;
@@ -130,8 +106,6 @@ h1 {
 }
 .input-row .description-input { width: 45%; }
 .input-row .value-input, .input-row .quantity-input, .input-row .amount-display { width: 15%; }
-
-/* 🔹 przycisk Dodaj */
 .add-row-button {
     width: 15%; 
     height: 35px;
@@ -147,8 +121,6 @@ h1 {
     background-color: #95a6b8;
     color: #29375a;;
 }
-
-/* 🔹 wiersze produktów z ramką */
 .product-row {
     display: flex;
     align-items: center;
@@ -163,8 +135,6 @@ h1 {
 .product-row .lp-cell { width: 5%; text-align: center; }
 .product-row .description-cell { width: 45%; }
 .product-row .value-cell, .product-row .quantity-cell, .product-row .amount-cell { width: 15%; text-align: right; padding-right: 15px; }
-
-/* 🔹 przycisk usuń */
 .product-row .remove-btn {
     width: 15%;
     background-color: #602c31; 
@@ -180,3 +150,4 @@ h1 {
     background-color: #aa7b81;
     color: #602c31;
 }
+
