@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="faktura.css">
+    <title>Faktura XML</title>
+</head>
+<body>
+    <input type="file" id="xml-importer" accept=".xml" style="display: none;">
+    
+    <div class="srodek">
+        <div class ="napisnapis">
+            <h1>FAKTURA</h1>
+        </div>
+        <div class="head">
+            <button class="buttonHead xml-load-btn">wgraj plik xml</button>
+            <button class="buttonHead xml-export-btn">eksportuj do xml</button> 
+        </div>
+        
+        <div class="scrollable-content">
+            <div class="Klient">
+
+                <label for="numerFaktury">Numer Faktury:</label><input type="text" id="numerFaktury" name="numerFaktury">
+                <label for="klient">Klient:</label><input type="text" id="klient" name="klient">
+                <label for="sprzedawca">Sprzedawca:</label><input type="text" id="sprzedawca" name="sprzedawca">
+
+                <label for="data_wystawienia">Data wystawienia:</label><input type="date" id="data_wystawienia" name="data_wystawienia">
+                <label for="adres_klient">Adres klienta:</label><input type="text" id="adres_klient" name="adres_klient">
+                <label for="adres_sprzedawca">Adres sprzedawcy:</label><input type="text" id="adres_sprzedawca" name="adres_sprzedawca">
+
+                <label for="data_sprzedazy">Data dostarczenia:</label><input type="date" id="data_sprzedazy" name="data_sprzedazy">
+                <label for="klient_nip">[klient] Nip:</label><input type="text" id="klient_nip" name="klient_nip">
+                <label for="sprzedawca_nip">[sprzedawca] Nip:</label><input type="text" id="sprzedawca_nip" name="sprzedawca_nip">
+
+            </div>
+            
+            
+            
+            <div class="table-header">
+                <div class="lp">Lp.</div>
+                <div class="actions"></div>
+            </div>
+            
+            <div class="input-row">
+                <div class="lp-input"></div>
+                <input type="text" class="description-input" placeholder="Usługa">
+                <input type="number" class="value-input" placeholder="Wartość">
+                <input type="number" class="quantity-input" placeholder="Ilość">
+                <input type="text" class="amount-display" readonly placeholder="Kwota">
+                <button class="add-row-button">Dodaj</button>
+            </div>
+
+            <div class="product-list" id="product-list"></div>
+        </div>
+    </div>
+    <script src="faktura.js"></script>
+</body>
+</html>
